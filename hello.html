@@ -1,40 +1,94 @@
 <head>
-  <title>it reigns</title>
+    <title>it reigns</title>
 </head>
 
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Brand</a>
-        </div>
-        <div class="navbar-text navbar-right">{{> loginButtons}}</div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse-id">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Interview</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+{{> navbar}}
+
 <div class="container">
-    {{> hello}}
+    <div class="row">
+        <div class="col-md-12">
+            {{> pointMeta}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{> editingUsers}}
+        </div>
+    </div>
 </div>
 
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="editingUsers">
+    Editors:
+    {{#each users}}
+        <span class="label label-success">{{firstname}} </span>
+
+    {{/each}}
+</template>
+
+<template name="navbar">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-id" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
+            <div class="navbar-text navbar-right">{{> loginButtons}}</div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-id">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Interview</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">About</a></li>
+                    <li>
+                        <a href="#" class="js-add-point">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            new point
+                        </a>
+                    </li>
+
+
+                    <!-- drop down list -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-haspopup="true"
+                           aria-expanded="false">points<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            {{#each points}}
+                                <li><a href="#" class="js-load-point">{{title}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <!-- end drop down list -->
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</template>
+
+<template name="pointMeta">
+    {{#with point}}
+        <span class="h1"> {{> editableText collection="points" field="title"}}</span>
+        {{#if canEdit}}
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" class="js-tog-private">Private
+                </label>
+            </div>
+        {{/if}}
+
+    {{/with}}
 </template>
