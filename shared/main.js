@@ -1,3 +1,4 @@
+Routes = new Mongo.Collection("routes");
 Points = new Mongo.Collection("points");
 EditingUsers = new Mongo.Collection("editingUsers");
 

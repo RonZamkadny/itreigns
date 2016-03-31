@@ -1,3 +1,4 @@
+Meteor.subscribe("routes");
 Meteor.subscribe("points");
 Meteor.subscribe("editingUsers");
 
