@@ -1,6 +1,13 @@
+var Schemas = {};
+
 EditingUsers = new Mongo.Collection("editingUsers");
+Schemas.EditingUsers = new SimpleSchema({
+
+});
+EditingUsers.attachSchema(Schemas.EditingUsers);
+
 Locations = new Mongo.Collection("locations");
-/*LocationsSchema = new SimpleSchema({
+Schemas.LocationsSchema = new SimpleSchema({
     latitude: {
         type: String,
         optional: true
@@ -9,29 +16,30 @@ Locations = new Mongo.Collection("locations");
         type: String,
         optional: true
     }
-});*/
+});
+Locations.attachSchema(Schemas.Locations);
 
 Images = new Mongo.Collection("images");
-/*ImagesSchema = new SimpleSchema({
+Schemas.ImagesSchema = new SimpleSchema({
     s3id: {
         type: String
     }
-});*/
-//Images.attachSchema(ImagesSchema);
+});
+Images.attachSchema(Schemas.ImagesSchema);
 
 Points = new Mongo.Collection("points");
-/*PointsSchema = new SimpleSchema({
+Schemas.PointsSchema = new SimpleSchema({
     title: {
         type: String
     },
     location: {
-        type: Locations
+        type: Schemas.LocationsSchema
     },
     owner: {
-        type: EditingUsers
+        type: Schemas.EditingUsers
     },
     sharedTo: {
-        type: [EditingUsers],
+        type: [Schemas.EditingUsers],
         optional: true
     },
     createdOn: {
@@ -46,34 +54,32 @@ Points = new Mongo.Collection("points");
         optional: true
     },
     image: {
-        type: Images
+        type: Schemas.ImagesSchema
     }
-
 });
-Points.attachSchema(PointsSchema);*/
+Points.attachSchema(Schemas.PointsSchema);
 
 Directions = new Mongo.Collection("directions");
-/*DirectionsSchema = new SimpleSchema({
+Schemas.DirectionsSchema = new SimpleSchema({
     from: {
-        type: Points,
+        type: Schemas.PointsSchema,
     },
     to: {
-        type: Points,
+        type: Schemas.PointsSchema,
     }
 
 });
-Directions.attachSchema(DirectionsSchema);*/
+Directions.attachSchema(Schemas.DirectionsSchema);
 
 Routes = new Mongo.Collection("routes");
-/*
-RouteSchema = new SimpleSchema({
+Schemas.RoutesSchema = new SimpleSchema({
     title: {
         type: String,
         label: "Title"
     },
     directions: {
-        type: [DirectionsSchema],
+        type: [Schemas.DirectionsSchema],
         minCount: 1
     }
 });
-Routes.attachSchema(RouteSchema);*/
+Routes.attachSchema(Schemas.RoutesSchema);
