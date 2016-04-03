@@ -1,5 +1,5 @@
 <head>
-    <title>it reigns</title>
+    <title>vertex.travel</title>
 </head>
 
 <body>
@@ -16,6 +16,12 @@
     <div class="row">
         <div class="col-md-12">
             {{> editingUsers}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{> createNewPointForm}}
         </div>
     </div>
 </div>
@@ -91,4 +97,15 @@
         {{/if}}
 
     {{/with}}
+</template>
+
+<template name="createNewPointForm">
+    {{#autoForm collection="Points" id="createNewPointForm" type="method" meteormethod="createPoint"}}
+        <fieldset>
+            <legend>Point</legend>
+            {{> afQuickField name='title'}}
+            {{> afQuickField name='image'}}
+            {{> afQuickField name='description'}}
+        </fieldset>
+    {{/autoForm}}
 </template>
